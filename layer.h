@@ -6,8 +6,10 @@
  */
 typedef struct Layer
 {
+    int nodes;
     matrix *weights;
     matrix *bias;
+    matrix *outputOfLayer;
     void (*activationFunction)(double*);
     struct Layer *prev;
     struct Layer *next;
