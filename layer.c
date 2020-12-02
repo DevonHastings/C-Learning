@@ -11,7 +11,6 @@
 // TODO: I think I will set it up so that I generate the weight based on the previous layer
 // TODO: dimensions. The bias will be trivial.
 
-
 layer *newInputLayer(struct Layer **startLayer, matrix *data)
 {
     // Make sure there is some data to look at
@@ -30,7 +29,6 @@ layer *newInputLayer(struct Layer **startLayer, matrix *data)
     return new_input_layer;
 }
 
-
 layer *newLayer(int numberOfNodes, void (*actFunc)(double*), layer *previousLayer)
 {
     // Test to make sure the number of nodes is greater than 0
@@ -44,6 +42,16 @@ layer *newLayer(int numberOfNodes, void (*actFunc)(double*), layer *previousLaye
      // Columns for the weights are the current layer, the previous layer determines the rows
     new_layer->weights = newRandomMatrix(previousLayer->nodes, numberOfNodes);
     new_layer->bias = newRandomMatrix(numberOfNodes, 1);
+    // Set the activation function
+    new_layer->activationFunction = actFunc;
+    // Allocate and calculate the linear output
+    matrix *preOutput = (matrix*)malloc(sizeof(matrix));
+    // TODO: Should I check to make sure the output of the previous layer is a vector?
+    /* product();
 
+    // Set the output of the layer: output = actFunc(WX+B)
+    new_layer->outputOfLayer = apply(, actFunc);
+    */
 
+    return new_layer;
 }
